@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Наталья Лукашина](https://up.htmlacademy.ru/javascript/19/user/814025).
-* Наставник: `Неизвестно`.
+* Наставник: `нет. всё сама =)`.
 
 ---
 
