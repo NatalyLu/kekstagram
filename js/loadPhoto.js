@@ -13,7 +13,7 @@
     .querySelector('.success').cloneNode(true);
     document.querySelector('main').appendChild(successTemplate);
     var success = document.querySelector('.success');
-    //successTemplate.classList.remove('visually-hidden');
+    // successTemplate.classList.remove('visually-hidden');
     var successButton = document.querySelector('.success__button');
 
     // var hideSuccessPopup = function () {
@@ -23,18 +23,15 @@
 
     // successButton.addEventListener('click', hideSuccessPopup);
 
-    var findClickSuccess = function (evt) {
-      //var target = evt.target;
-      //if (target.className === success.className) {
-        successTemplate.classList.add('visually-hidden');
-     // }
+    var findClickSuccess = function () { // evt
+      // var target = evt.target;
+      // if (target.className === success.className) {
+      successTemplate.classList.add('visually-hidden');
+      // }
       successButton.removeEventListener('click', findClickSuccess);
     };
 
     success.addEventListener('click', findClickSuccess);
-
-
-
   };
 
   // Функция для обработки некорректной загрузки изображения
@@ -64,12 +61,6 @@
       document.querySelector('.error').classList.remove('visually-hidden');
     }
   };
-
-
-
-
-
-
 
   imgLoadForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
