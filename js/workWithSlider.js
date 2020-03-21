@@ -1,16 +1,15 @@
 'use strict';
 
 
-// **************************************************************
+// .......................................................
 // Обработка событий мыши в ползунке
-// **************************************************************
+// .......................................................
 (function () {
   // Обработка клика по линии ползунка
   window.EffectsForPhoto.effectLevel.addEventListener('click', window.EffectsForPhoto.changeCurrentEffect);
 
   // Обработка перемещения ползунка
   window.EffectsForPhoto.levelPin.addEventListener('mousedown', function (evt) {
-    // Отмена действий браузера
     evt.preventDefault();
 
     var levelParametrs = {
