@@ -6,60 +6,65 @@
 // .......................................................
 (function () {
   var imgLoadForm = document.querySelector('.img-upload__form');
+  var mainTeg = document.querySelector('main');
+  var uploadOverlay = document.querySelector('.img-upload__overlay');
 
   // Функция для обработки успешной загруузки изображения
   var loadImgSuccessful = function () {
-    var successTemplate = document.querySelector('#success').content
-    .querySelector('.success').cloneNode(true);
-    document.querySelector('main').appendChild(successTemplate);
-    var success = document.querySelector('.success');
-    // successTemplate.classList.remove('visually-hidden');
-    var successButton = document.querySelector('.success__button');
+    var successTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+    mainTeg.appendChild(successTemplate);
 
-    // var hideSuccessPopup = function () {
-    //   success.classList.add('visually-hidden');
-    //  // successButton.removeEventListener('keydown');  main.removeChild(errorPopup);
-    // };
-
-    // successButton.addEventListener('click', hideSuccessPopup);
-
-    var findClickSuccess = function () { // evt
-      // var target = evt.target;
-      // if (target.className === success.className) {
-      successTemplate.classList.add('visually-hidden');
-      // }
-      successButton.removeEventListener('click', findClickSuccess);
+    var findClickSuccessClick = function (evt) {
+      if ((evt.target.className !== 'success__inner') && (evt.target.className !== 'success__title')) {
+        findClickSuccess();
+      }
     };
 
-    success.addEventListener('click', findClickSuccess);
+    var findClickSuccess = function () {
+      if (successTemplate) {
+        mainTeg.removeChild(successTemplate);
+      }
+      document.removeEventListener('click', findClickSuccessClick);
+      document.removeEventListener('keydown', succesKeydownHandler);
+    };
+
+    document.addEventListener('click', findClickSuccessClick);
+
+    var succesKeydownHandler = function (evt) {
+      window.createData.isEscEvent(evt, findClickSuccess);
+    };
+
+    document.addEventListener('keydown', succesKeydownHandler);
   };
 
   // Функция для обработки некорректной загрузки изображения
   var loadImgUnsuccessful = function () {
+    uploadOverlay.classList.add('hidden');
+
+    var errorPopup = document.querySelector('#error').content.cloneNode(true);
+    mainTeg.appendChild(errorPopup);
     var error = document.querySelector('.error');
-    var errorButtons = document.querySelectorAll('.error__button');
-    if (!error) {
-      var errorTemplate = document.querySelector('#error').content
-      .querySelector('.error').cloneNode(true);
-      document.querySelector('main').appendChild(errorTemplate);
 
-      errorButtons.forEach(function (item) {
-        item.addEventListener('click', function () {
-          error.classList.add('visually-hidden');
-        });
-      });
+    var closeErrorClick = function (evt) {
+      if ((evt.target.className !== 'error__inner') && (evt.target.className !== 'error__title')) {
+        closeError();
+      }
+    };
 
-      var findClickError = function (evt) {
-        var target = evt.target;
-        if (target.className === error.className) {
-          error.classList.add('visually-hidden');
-        }
-      };
+    var closeError = function () {
+      if (error) {
+        mainTeg.removeChild(error);
+      }
+      document.removeEventListener('click', closeError);
+      document.removeEventListener('keydown', errorKeydownHandler);
+    };
 
-      error.addEventListener('click', findClickError);
-    } else {
-      document.querySelector('.error').classList.remove('visually-hidden');
-    }
+    document.addEventListener('click', closeErrorClick);
+
+    var errorKeydownHandler = function (evt) {
+      window.createData.isEscEvent(evt, closeError);
+    };
+    document.addEventListener('keydown', errorKeydownHandler);
   };
 
   imgLoadForm.addEventListener('submit', function (evt) {
@@ -72,6 +77,7 @@
   });
 
   window.loadPhoto = {
-    imgLoadForm: imgLoadForm
+    imgLoadForm: imgLoadForm,
+    mainClass: mainTeg
   };
 })();

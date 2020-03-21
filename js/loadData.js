@@ -1,9 +1,12 @@
 'use strict';
 
 
+// .......................................................
+// Загрузка данных
+// .......................................................
 (function () {
   var URL_LOAD = 'https://js.dump.academy/kekstagram/data';
-  var URL_SAVE = 'https://js.dump.academy/kekstagram';
+  var URL_SAVE = 'https://js.dump.academy/kekstagramnn';
 
   var TIMEOUT = 10000;
   var STATUS = 200;
