@@ -29,9 +29,9 @@
 
     zoomSettings: {
       scale: {
-        min: 25,
-        max: 100,
-        step: 25
+        MIN: 25,
+        MAX: 100,
+        STEP: 25
       }
     },
 
@@ -132,10 +132,10 @@
       var currentValue = parseInt(window.effectsForPhoto.scaleControlValue.value, 10);
       var typeResize = window.effectsForPhoto.getTypeResize(evt);
 
-      if (currentValue > window.effectsForPhoto.zoomSettings.scale.min && typeResize === 'smaller') {
-        currentValue -= window.effectsForPhoto.zoomSettings.scale.step;
-      } else if (currentValue < window.effectsForPhoto.zoomSettings.scale.max && typeResize === 'bigger') {
-        currentValue += window.effectsForPhoto.zoomSettings.scale.step;
+      if (currentValue > window.effectsForPhoto.zoomSettings.scale.MIN && typeResize === 'smaller') {
+        currentValue -= window.effectsForPhoto.zoomSettings.scale.STEP;
+      } else if (currentValue < window.effectsForPhoto.zoomSettings.scale.MAX && typeResize === 'bigger') {
+        currentValue += window.effectsForPhoto.zoomSettings.scale.STEP;
       }
 
       window.effectsForPhoto.resizeImage(currentValue);
