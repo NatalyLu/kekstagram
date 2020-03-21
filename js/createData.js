@@ -16,7 +16,7 @@
   var buttonD = imgFiltersForm.querySelector('#filter-discussed');
   var closeButton = bigPicture.querySelector('#picture-cancel');
 
-  var randomImg = {
+  var RangeRandom = {
     MIN: 0,
     MAX: 10
   };
@@ -209,7 +209,7 @@
       var uniquePhotos = images.filter(function (it, i) {
         return images.indexOf(it) === i;
       });
-      getImages(window.util.createRandomArray(uniquePhotos).slice(randomImg.MIN, randomImg.MAX));
+      getImages(window.util.createRandomArray(uniquePhotos).slice(RangeRandom.MIN, RangeRandom.MAX));
       evt.target.classList.add('img-filters__button--active');
     };
 
