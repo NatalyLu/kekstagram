@@ -61,6 +61,9 @@
           } else {
             errorMessage = 'Хэш-тег должен начинаться с символа #';
           }
+          if (!item.match(/^#[a-zA-Z0-9а-яА-Я]+$/)) {
+            errorMessage = 'Хэштег должен состоять из букв и чисел';
+          }
           if (compareElements(hashTags)) {
             errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
           }

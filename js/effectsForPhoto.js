@@ -6,6 +6,7 @@
 (function () {
   window.EffectsForPhoto = {
     ESC_KEYCODE: 27,
+    STANDARD_ZOOM_VALUE: '100%',
 
     uploadFile: document.getElementById('upload-file'),
     imgUpload: document.querySelector('.img-upload__overlay'),
@@ -86,7 +87,7 @@
       } else {
         window.EffectsForPhoto.imgUploadimg.className = 'effects__preview--' + currentEffect;
         window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'block';
-        window.EffectsForPhoto.scaleControlValue.value = '100%';
+        window.EffectsForPhoto.scaleControlValue.value = window.EffectsForPhoto.STANDARD_ZOOM_VALUE;
         window.EffectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
         window.EffectsForPhoto.changeEffect(100);
         window.EffectsForPhoto.installationValueOfEffect(100);
@@ -97,6 +98,7 @@
     knowCurrentClientX: function (evtCurrent) {
       return (evtCurrent.clientX);
     },
+
     // Функция для изменения эффекта у фото и отрисовки линии полозунка по новому Х
     changeCurrentEffect: function (evt) {
       var length = window.EffectsForPhoto.levelLine.offsetWidth;
@@ -105,6 +107,11 @@
       var findEffect = window.EffectsForPhoto.findEffectValueInPercent(window.EffectsForPhoto.knowCurrentClientX(evt), length, LevelPosition);
       window.EffectsForPhoto.changeEffect(findEffect);
       window.EffectsForPhoto.installationValueOfEffect(findEffect);
+    },
+
+    // Функция применения зуммирования
+    setZoomValue: function () {
+      window.EffectsForPhoto.scaleControlValue.value = window.EffectsForPhoto.STANDARD_ZOOM_VALUE;
     },
 
     // Функция применения зуммирования

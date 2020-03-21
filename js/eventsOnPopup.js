@@ -49,6 +49,7 @@
 
   // Функции закрытия и открытия окна
   var openPopup = function () {
+    window.EffectsForPhoto.setZoomValue();
     window.EffectsForPhoto.imgUpload.classList.remove('hidden');
     window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'none';
     document.addEventListener('keydown', openPopupEscPress);
