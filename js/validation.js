@@ -13,11 +13,11 @@
   var COUNT_HASHTAGS = 5;
   var COMMENT_LENGTH = 140;
 
-  var errorBorder = function (el) {
+  var addErrorBorder = function (el) {
     el.style = 'border-color: red; border-width: 2px;';
   };
 
-  var errorBorderCansel = function (el) {
+  var canselErrorBorder = function (el) {
     el.style = 'border: none;';
   };
 
@@ -45,7 +45,7 @@
   };
 
   // Функция отлавливающая ошибки при заполнении поля комментарий
-  var hashtagValid = function () {
+  var checkHashtag = function () {
     var hashTegsText = textHashtags.value;
     hashTegsText.toLowerCase().trim();
     var hashTags = hashTegsText.split(' ');
@@ -80,38 +80,38 @@
     }
 
     if (errorMessage !== '') {
-      errorBorder(textHashtags);
+      addErrorBorder(textHashtags);
     } else {
-      errorBorderCansel(textHashtags);
+      canselErrorBorder(textHashtags);
     }
     textHashtags.setCustomValidity(errorMessage);
   };
 
-  var commentValid = function (text) {
+  var checkComment = function (text) {
     if (text.length > COMMENT_LENGTH) {
       textDescription.setCustomValidity('Длина комментария не может быть больше 140 символов');
-      errorBorder(textDescription);
+      addErrorBorder(textDescription);
       return false;
     } else {
       textDescription.setCustomValidity('');
-      errorBorderCansel(textDescription);
+      canselErrorBorder(textDescription);
       return true;
     }
   };
 
-  var hashValid = function () {
+  var checkForm = function () {
     var hashtags = textHashtags.value.toLowerCase().split(' ');
     if (textHashtags.value !== '') {
-      hashtagValid(hashtags);
+      checkHashtag(hashtags);
     }
 
     var comment = textDescription.value.split('');
     if (textDescription.value !== '') {
-      commentValid(comment);
+      checkComment(comment);
     }
   };
 
-  uploadSubmit.addEventListener('click', hashValid);
+  uploadSubmit.addEventListener('click', checkForm);
 
   window.validation = {
     textHashtags: textHashtags
