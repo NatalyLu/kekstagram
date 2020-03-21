@@ -4,7 +4,7 @@
 // Работа с окнами. Отлавливание событий
 // .......................................................
 (function () {
-  var imgUploadText = window.EffectsForPhoto.imgUpload.querySelector('.img-upload__text');
+  var imgUploadText = window.effectsForPhoto.imgUpload.querySelector('.img-upload__text');
   var textHashtags = document.querySelector('.text__hashtags');
   var textDescription = imgUploadText.querySelector('.text__description');
 
@@ -29,40 +29,40 @@
   });
 
   var openPopupEscPress = function (evt) {
-    if ((evt.keyCode === window.EffectsForPhoto.ESC_KEYCODE) && (textFocus) && (hashtagFocus)) {
+    if ((evt.keyCode === window.effectsForPhoto.ESC_KEYCODE) && (textFocus) && (hashtagFocus)) {
       closePopup();
     }
   };
 
   // Загрузка фото
-  window.EffectsForPhoto.uploadFile.addEventListener('change', function () {
+  window.effectsForPhoto.uploadFile.addEventListener('change', function () {
     openPopup();
   });
 
   // Закрытие окна редактирования
-  window.EffectsForPhoto.buttonClose.addEventListener('click', function () {
+  window.effectsForPhoto.buttonClose.addEventListener('click', function () {
     closePopup();
   });
 
   // Зумирование изображения
-  window.EffectsForPhoto.imgUploadScale.addEventListener('click', window.EffectsForPhoto.onClickResize);
+  window.effectsForPhoto.imgUploadScale.addEventListener('click', window.effectsForPhoto.onClickResize);
 
   // Функции закрытия и открытия окна
   var openPopup = function () {
-    window.EffectsForPhoto.setZoomValue();
-    window.EffectsForPhoto.imgUpload.classList.remove('hidden');
-    window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'none';
+    window.effectsForPhoto.setZoomValue();
+    window.effectsForPhoto.imgUpload.classList.remove('hidden');
+    window.effectsForPhoto.imgUploadEffectLavel.style.display = 'none';
     document.addEventListener('keydown', openPopupEscPress);
   };
 
   var closePopup = function () {
-    window.EffectsForPhoto.imgUpload.classList.add('hidden');
+    window.effectsForPhoto.imgUpload.classList.add('hidden');
     document.removeEventListener('keydown', openPopupEscPress);
 
-    window.EffectsForPhoto.effectLevel.removeEventListener('click', window.EffectsForPhoto.changeCurrentEffect);
-    window.EffectsForPhoto.imgUploadScale.removeEventListener('click', window.EffectsForPhoto.onClickResize);
-    window.EffectsForPhoto.changeEffect(0);
-    window.EffectsForPhoto.installationValueOfEffect(0);
+    window.effectsForPhoto.effectLevel.removeEventListener('click', window.effectsForPhoto.changeCurrentEffect);
+    window.effectsForPhoto.imgUploadScale.removeEventListener('click', window.effectsForPhoto.onClickResize);
+    window.effectsForPhoto.changeEffect(0);
+    window.effectsForPhoto.installationValueOfEffect(0);
     // сброс хэш-тега при закрытии окна
     window.validation.textHashtags.value = '';
   };

@@ -4,7 +4,7 @@
 // Работа с всплывающим окном. Применение эффектов
 // .......................................................
 (function () {
-  window.EffectsForPhoto = {
+  window.effectsForPhoto = {
     ESC_KEYCODE: 27,
     STANDARD_ZOOM_VALUE: '100%',
 
@@ -37,35 +37,35 @@
 
     // Функция для установки нужного значения для выбранного эффекта
     installationValueOfEffect: function (valueOfEffect) {
-      switch (window.EffectsForPhoto.imgUploadimg.className) {
+      switch (window.effectsForPhoto.imgUploadimg.className) {
         case 'effects__preview--chrome':
-          window.EffectsForPhoto.imgUploadimg.style.filter = 'grayscale(' + valueOfEffect / 100 + ')';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'grayscale(' + valueOfEffect / 100 + ')';
           break;
         case 'effects__preview--sepia':
-          window.EffectsForPhoto.imgUploadimg.style.filter = 'sepia(' + valueOfEffect / 100 + ')';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'sepia(' + valueOfEffect / 100 + ')';
           break;
         case 'effects__preview--marvin':
-          window.EffectsForPhoto.imgUploadimg.style.filter = 'invert(' + valueOfEffect + '%)';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'invert(' + valueOfEffect + '%)';
           break;
         case 'effects__preview--phobos':
-          window.EffectsForPhoto.imgUploadimg.style.filter = 'blur(' + 3 * valueOfEffect / 100 + 'px)';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'blur(' + 3 * valueOfEffect / 100 + 'px)';
           break;
         case 'effects__preview--heat':
-          window.EffectsForPhoto. imgUploadimg.style.filter = 'brightness(' + (valueOfEffect / 100 * 2 + 1) + ')';
+          window.effectsForPhoto. imgUploadimg.style.filter = 'brightness(' + (valueOfEffect / 100 * 2 + 1) + ')';
           break;
         default:
-          window.EffectsForPhoto.imgUploadimg.style.filter = 'none';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'none';
       }
     },
 
     // Функция для применения нового эффекта
     changeEffect: function (value) {
       if ((value <= 100) && (value >= 0)) {
-        window.EffectsForPhoto.levelValue.value = value;
-        window.EffectsForPhoto.levelValue.defaultValue = value;
+        window.effectsForPhoto.levelValue.value = value;
+        window.effectsForPhoto.levelValue.defaultValue = value;
         // Ставим курсор в нужное место и подтягиваем за ним линию с подсветкой
-        window.EffectsForPhoto.levelPin.style.left = value + '%';
-        window.EffectsForPhoto.levelDepth.style.width = value + '%';
+        window.effectsForPhoto.levelPin.style.left = value + '%';
+        window.effectsForPhoto.levelDepth.style.width = value + '%';
       }
     },
 
@@ -80,17 +80,17 @@
       var currentEffect = evtClick.currentTarget.value;
 
       if (currentEffect === 'none') {
-        window.EffectsForPhoto.imgUploadimg.className = 'effects__preview--none';
-        window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'none';
-        window.EffectsForPhoto.changeEffect(0);
-        window.EffectsForPhoto.installationValueOfEffect(0);
+        window.effectsForPhoto.imgUploadimg.className = 'effects__preview--none';
+        window.effectsForPhoto.imgUploadEffectLavel.style.display = 'none';
+        window.effectsForPhoto.changeEffect(0);
+        window.effectsForPhoto.installationValueOfEffect(0);
       } else {
-        window.EffectsForPhoto.imgUploadimg.className = 'effects__preview--' + currentEffect;
-        window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'block';
-        window.EffectsForPhoto.scaleControlValue.value = window.EffectsForPhoto.STANDARD_ZOOM_VALUE;
-        window.EffectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
-        window.EffectsForPhoto.changeEffect(100);
-        window.EffectsForPhoto.installationValueOfEffect(100);
+        window.effectsForPhoto.imgUploadimg.className = 'effects__preview--' + currentEffect;
+        window.effectsForPhoto.imgUploadEffectLavel.style.display = 'block';
+        window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
+        window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
+        window.effectsForPhoto.changeEffect(100);
+        window.effectsForPhoto.installationValueOfEffect(100);
       }
     },
 
@@ -101,23 +101,23 @@
 
     // Функция для изменения эффекта у фото и отрисовки линии полозунка по новому Х
     changeCurrentEffect: function (evt) {
-      var length = window.EffectsForPhoto.levelLine.offsetWidth;
-      var LevelPosition = window.EffectsForPhoto.levelLine.getBoundingClientRect().left;
+      var length = window.effectsForPhoto.levelLine.offsetWidth;
+      var levelPosition = window.effectsForPhoto.levelLine.getBoundingClientRect().left;
 
-      var findEffect = window.EffectsForPhoto.findEffectValueInPercent(window.EffectsForPhoto.knowCurrentClientX(evt), length, LevelPosition);
-      window.EffectsForPhoto.changeEffect(findEffect);
-      window.EffectsForPhoto.installationValueOfEffect(findEffect);
+      var findEffect = window.effectsForPhoto.findEffectValueInPercent(window.effectsForPhoto.knowCurrentClientX(evt), length, levelPosition);
+      window.effectsForPhoto.changeEffect(findEffect);
+      window.effectsForPhoto.installationValueOfEffect(findEffect);
     },
 
     // Функция применения зуммирования
     setZoomValue: function () {
-      window.EffectsForPhoto.scaleControlValue.value = window.EffectsForPhoto.STANDARD_ZOOM_VALUE;
+      window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
     },
 
     // Функция применения зуммирования
     resizeImage: function (value) {
-      window.EffectsForPhoto.scaleControlValue.value = value + '%';
-      window.EffectsForPhoto.imgUploadPreview.style.transform = 'scale(' + value / 100 + ')';
+      window.effectsForPhoto.scaleControlValue.value = value + '%';
+      window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(' + value / 100 + ')';
     },
 
     // Функция определения типа зуммирования +-
@@ -129,16 +129,16 @@
 
     // Функция определение конечного значения зуммирования
     onClickResize: function (evt) {
-      var currentValue = parseInt(window.EffectsForPhoto.scaleControlValue.value, 10);
-      var typeResize = window.EffectsForPhoto.getTypeResize(evt);
+      var currentValue = parseInt(window.effectsForPhoto.scaleControlValue.value, 10);
+      var typeResize = window.effectsForPhoto.getTypeResize(evt);
 
-      if (currentValue > window.EffectsForPhoto.zoomSettings.scale.min && typeResize === 'smaller') {
-        currentValue -= window.EffectsForPhoto.zoomSettings.scale.step;
-      } else if (currentValue < window.EffectsForPhoto.zoomSettings.scale.max && typeResize === 'bigger') {
-        currentValue += window.EffectsForPhoto.zoomSettings.scale.step;
+      if (currentValue > window.effectsForPhoto.zoomSettings.scale.min && typeResize === 'smaller') {
+        currentValue -= window.effectsForPhoto.zoomSettings.scale.step;
+      } else if (currentValue < window.effectsForPhoto.zoomSettings.scale.max && typeResize === 'bigger') {
+        currentValue += window.effectsForPhoto.zoomSettings.scale.step;
       }
 
-      window.EffectsForPhoto.resizeImage(currentValue);
+      window.effectsForPhoto.resizeImage(currentValue);
     }
   };
 })();

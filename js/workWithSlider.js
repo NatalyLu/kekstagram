@@ -5,30 +5,30 @@
 // .......................................................
 (function () {
   // Обработка клика по линии ползунка
-  window.EffectsForPhoto.effectLevel.addEventListener('click', window.EffectsForPhoto.changeCurrentEffect);
+  window.effectsForPhoto.effectLevel.addEventListener('click', window.effectsForPhoto.changeCurrentEffect);
 
   // Обработка перемещения ползунка
-  window.EffectsForPhoto.levelPin.addEventListener('mousedown', function (evt) {
+  window.effectsForPhoto.levelPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var levelParametrs = {
-      levelLineLength: window.EffectsForPhoto.levelLine.offsetWidth,
-      LevelLeftPosition: window.EffectsForPhoto.levelLine.getBoundingClientRect().left
+      levelLineLength: window.effectsForPhoto.levelLine.offsetWidth,
+      levelLeftPosition: window.effectsForPhoto.levelLine.getBoundingClientRect().left
     };
 
     // Функция для ограничения позиции курсора на шкале
     var coorsorMoveHandler = function (evtMove) {
-      var skalePosition = window.EffectsForPhoto.knowCurrentClientX(evtMove);
+      var skalePosition = window.effectsForPhoto.knowCurrentClientX(evtMove);
 
       // Ограничиваем перемещение ползунка
-      if (skalePosition < levelParametrs.LevelLeftPosition) {
-        skalePosition = levelParametrs.LevelLeftPosition;
+      if (skalePosition < levelParametrs.levelLeftPosition) {
+        skalePosition = levelParametrs.levelLeftPosition;
       }
-      if (skalePosition > levelParametrs.LevelLeftPosition + levelParametrs.levelLineLength) {
-        skalePosition = levelParametrs.LevelLeftPosition + levelParametrs.levelLineLength;
+      if (skalePosition > levelParametrs.levelLeftPosition + levelParametrs.levelLineLength) {
+        skalePosition = levelParametrs.levelLeftPosition + levelParametrs.levelLineLength;
       }
 
-      window.EffectsForPhoto.changeCurrentEffect(evtMove);
+      window.effectsForPhoto.changeCurrentEffect(evtMove);
     };
 
     // Функция для удаления обработчиков
@@ -42,7 +42,7 @@
   });
 
   // Обработка клика по маленькой картинке (перемещщение между фильтрами)
-  window.EffectsForPhoto.effectsRadio.forEach(function (evtItem) {
-    evtItem.addEventListener('click', window.EffectsForPhoto.imgAddEffectHandler);
+  window.effectsForPhoto.effectsRadio.forEach(function (evtItem) {
+    evtItem.addEventListener('click', window.effectsForPhoto.imgAddEffectHandler);
   });
 })();
