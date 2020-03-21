@@ -1,6 +1,5 @@
 'use strict';
 
-
 // .......................................................
 // Работа с всплывающим окном. Применение эффектов
 // .......................................................
@@ -82,7 +81,6 @@
       if (currentEffect === 'none') {
         window.EffectsForPhoto.imgUploadimg.className = 'effects__preview--none';
         window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'none';
-        // !!!!!!!!!!!!!!1 не уверена, что нужно его ставить, ведь шкалу мы не видем на первом (нормальном) изображении
         window.EffectsForPhoto.changeEffect(0);
         window.EffectsForPhoto.installationValueOfEffect(0);
       } else {
@@ -90,7 +88,6 @@
         window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'block';
         window.EffectsForPhoto.scaleControlValue.value = '100%';
         window.EffectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
-        // imgUploadimg.style.transform = 'scale(1)';
         window.EffectsForPhoto.changeEffect(100);
         window.EffectsForPhoto.installationValueOfEffect(100);
       }

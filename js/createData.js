@@ -1,33 +1,50 @@
 'use strict';
 
-
+// .....................................................................
+// Работа с изображениями, а именно:
+// Создание списка изображений. Открытие большого изображения из списка.
+// Создание комментариев. Переключение фильтров изображеий.
+// .....................................................................
 (function () {
-  var template = document.querySelector('#picture').content;
-
+  var template = document.querySelector('#picture').content.querySelector('.picture');
   var picturesContainer = document.querySelector('.pictures');
   var imgFilters = document.querySelector('.img-filters');
   var imgFiltersForm = imgFilters.querySelector('.img-filters__form');
-  var bigPic = document.querySelector('.big-picture');
+  var bigPicture = document.querySelector('.big-picture');
   var buttonDefault = imgFiltersForm.querySelector('#filter-default');
   var buttonR = imgFiltersForm.querySelector('#filter-random');
   var buttonD = imgFiltersForm.querySelector('#filter-discussed');
-  var closeButton = bigPic.querySelector('#picture-cancel');
-
-  var imgArray = [];
+  var closeButton = bigPicture.querySelector('#picture-cancel');
 
   var randomImg = {
     MIN: 0,
     MAX: 10
   };
 
-  var DEBOUNCE_INTERVAL = 300;
+  var DEBOUNCE_INTERVAL = 500;
   var COMMENTS = 5;
 
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 27;
 
+  var showElement = function (item) {
+    item.classList.remove('hidden');
+  };
+
+  var hideElement = function (item) {
+    item.classList.add('hidden');
+  };
+
   var closeButtonClickHandler = function () {
-    closeBigPhoto();
+    closeBigPicture();
+  };
+
+  var bigPicKeydownEscHandler = function (evt) {
+    isEscEvent(evt, closeBigPicture);
+  };
+
+  var bigPicKeydownEnterHandler = function (evt) {
+    isEnterEvent(evt, closeBigPicture);
   };
 
   var isEscEvent = function (evt, arg) {
@@ -42,19 +59,11 @@
     }
   };
 
-  var closeBigPhoto = function () {
-    window.helpers.hideItem(bigPic);
+  var closeBigPicture = function () {
+    hideElement(bigPicture);
     closeButton.removeEventListener('click', closeButtonClickHandler);
     closeButton.removeEventListener('keydown', bigPicKeydownEnterHandler);
     document.removeEventListener('keydown', bigPicKeydownEscHandler);
-  };
-
-  var bigPicKeydownEscHandler = function (evt) {
-    isEscEvent(evt, closeBigPhoto);
-  };
-
-  var bigPicKeydownEnterHandler = function (evt) {
-    isEnterEvent(evt, closeBigPhoto);
   };
 
   // Функция создания изображения (шаблона)
@@ -70,13 +79,9 @@
     return pictureClone;
   };
 
-  var showItem = function (item) {
-    item.classList.remove('hidden');
-  };
-
   // Функция создания комментариев
   var renderComments = function (comments) {
-    var socialComments = bigPic.querySelector('.social__comments');
+    var socialComments = bigPicture.querySelector('.social__comments');
 
     socialComments.innerHTML = '';
     var li = document.createElement('li');
@@ -96,12 +101,12 @@
   };
 
   // Функция для вывода всех комментариев
-  var generateComment = function (comments, number, handler, currentCount) {
-    var bigPicSocial = bigPic.querySelector('.big-picture__social');
-    var socialComments = bigPic.querySelector('.social__comments');
-    var commentsLoader = bigPic.querySelector('.comments-loader');
-
+  var createComment = function (comments, number, handler, currentCount) {
+    var bigPictureSocial = bigPicture.querySelector('.big-picture__social');
+    var socialComments = bigPicture.querySelector('.social__comments');
+    var commentsLoader = bigPicture.querySelector('.comments-loader');
     var fragment = document.createDocumentFragment();
+
     currentCount = 0;
     for (var i = 0; i < comments.length && i < number; i++) {
       fragment.appendChild(renderComments(comments[i]));
@@ -110,7 +115,7 @@
 
     socialComments.appendChild(fragment);
 
-    bigPicSocial.querySelector('.comments__current-count').textContent = currentCount;
+    bigPictureSocial.querySelector('.comments__current-count').textContent = currentCount;
     if (number > comments.length) {
       commentsLoader.classList.add('visually-hidden');
       commentsLoader.removeEventListener('click', handler);
@@ -119,30 +124,29 @@
     }
   };
 
-  // Показ одной фотографии
+  // Показ одной крупной фотографии
   var showBigPhoto = function (data, current) {
-    var bigPicSocial = bigPic.querySelector('.big-picture__social');
-    showItem(bigPic);
-    var bigPicSocialClone = bigPicSocial.cloneNode(true);
-    bigPicSocialClone.querySelector('.likes-count').textContent = data.likes;
-    bigPicSocialClone.querySelector('.social__caption').textContent = data.description;
-    bigPicSocialClone.querySelector('.comments-count').textContent = data.comments.length;
-    bigPicSocial.parentNode.replaceChild(bigPicSocialClone, bigPicSocial);
-    bigPic.querySelector('.big-picture__img').querySelector('img').src = data.url;
-
+    var bigPictureSocial = bigPicture.querySelector('.big-picture__social');
+    showElement(bigPicture);
+    var bigPictureSocialClone = bigPictureSocial.cloneNode(true);
+    bigPictureSocialClone.querySelector('.likes-count').textContent = data.likes;
+    bigPictureSocialClone.querySelector('.social__caption').textContent = data.description;
+    bigPictureSocialClone.querySelector('.comments-count').textContent = data.comments.length;
+    bigPictureSocial.parentNode.replaceChild(bigPictureSocialClone, bigPictureSocial);
+    bigPicture.querySelector('.big-picture__img').querySelector('img').src = data.url;
     var commentsNumber = COMMENTS;
 
     var renderCommentsHandler = function () {
       commentsNumber += COMMENTS;
-      generateComment(data.comments, commentsNumber, renderCommentsHandler);
+      createComment(data.comments, commentsNumber, renderCommentsHandler);
     };
 
-    var commentsLoader = bigPic.querySelector('.comments-loader');
-    generateComment(data.comments, commentsNumber, renderCommentsHandler, current);
+    var commentsLoader = bigPicture.querySelector('.comments-loader');
     commentsLoader.addEventListener('click', renderCommentsHandler);
-    closeButton.addEventListener('click', closeBigPhoto);
+    closeButton.addEventListener('click', closeBigPicture);
     closeButton.addEventListener('keydown', bigPicKeydownEnterHandler);
     document.addEventListener('keydown', bigPicKeydownEscHandler);
+    createComment(data.comments, commentsNumber, renderCommentsHandler, current);
   };
 
   // Функция для удаления изображений при переключении фильтра
@@ -179,8 +183,6 @@
 
   // Функция добавления изображений через шаблон
   var getImages = function (array) {
-    deletePictures();
-    removeFilter();
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < array.length; i++) {
       fragment.appendChild(createPicture(array[i]));
@@ -191,15 +193,19 @@
 
   // Основная функция для фильтрации изображений
   var getSuccessHandler = function (arr) {
-    imgArray = arr;
+    var imgArray = arr;
     getImages(imgArray);
 
     var defaultPhotosHandler = function (evt) {
+      deletePictures();
+      removeFilter();
       getImages(imgArray);
       evt.target.classList.add('img-filters__button--active');
     };
 
     var randomPhotosHandler = function (evt) {
+      deletePictures();
+      removeFilter();
       var uniquePhotos = imgArray.filter(function (it, i) {
         return imgArray.indexOf(it) === i;
       });
@@ -208,6 +214,8 @@
     };
 
     var discussedPhotosHandler = function (evt) {
+      deletePictures();
+      removeFilter();
       getImages(window.util.sortByComments(imgArray));
       evt.target.classList.add('img-filters__button--active');
     };
@@ -224,4 +232,8 @@
   };
 
   window.loadData.loadData(getSuccessHandler);
+
+  window.createData = {
+    isEscEvent: isEscEvent
+  };
 })();

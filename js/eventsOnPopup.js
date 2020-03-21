@@ -1,6 +1,5 @@
 'use strict';
 
-
 // .......................................................
 // Работа с окнами. Отлавливание событий
 // .......................................................
@@ -51,24 +50,9 @@
   // Функции закрытия и открытия окна
   var openPopup = function () {
     window.EffectsForPhoto.imgUpload.classList.remove('hidden');
-    window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'none';///////////////////////////////добавил
+    window.EffectsForPhoto.imgUploadEffectLavel.style.display = 'none';
     document.addEventListener('keydown', openPopupEscPress);
   };
-
-
-  var closeError = function () {
-    main.removeChild(errorPopup);
-    document.removeEventListener('keydown', escErrorHandler);
-  };
-
-  var escErrorHandler = function (evt) {
-    if (evt.keyCode === window.EffectsForPhoto.ESC_KEYCODE) {
-      closeError();
-    }
-  };
-
-  document.addEventListener('keydown', escErrorHandler);
-
 
   var closePopup = function () {
     window.EffectsForPhoto.imgUpload.classList.add('hidden');
@@ -76,8 +60,8 @@
 
     window.EffectsForPhoto.effectLevel.removeEventListener('click', window.EffectsForPhoto.changeCurrentEffect);
     window.EffectsForPhoto.imgUploadScale.removeEventListener('click', window.EffectsForPhoto.onClickResize);
-    window.EffectsForPhoto.changeEffect(0);///////////////////////////////добавил
-    window.EffectsForPhoto.installationValueOfEffect(0);///////////////////////////////добавил
+    window.EffectsForPhoto.changeEffect(0);
+    window.EffectsForPhoto.installationValueOfEffect(0);
     // сброс хэш-тега при закрытии окна
     window.validation.textHashtags.value = '';
   };
