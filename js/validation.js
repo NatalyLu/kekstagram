@@ -31,10 +31,10 @@
 
   // Функция проверки одинаковых хэш-тегов
   var compareElements = function (elements) {
-    var arrayEl = turnInSmallLetters(elements);
+    var hashtags = turnInSmallLetters(elements);
     var values = Object.create(null);
 
-    for (var i = 0; i < arrayEl.length; ++i) {
+    for (var i = 0; i < hashtags.length; ++i) {
       var firstElement = elements[i];
       if (firstElement in values) {
         return true;

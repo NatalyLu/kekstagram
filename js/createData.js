@@ -151,8 +151,8 @@
 
   // Функция для удаления изображений при переключении фильтра
   var deletePictures = function () {
-    var allOfPicture = picturesContainer.querySelectorAll('.picture');
-    allOfPicture.forEach(function (element) {
+    var pictures = picturesContainer.querySelectorAll('.picture');
+    pictures.forEach(function (element) {
       element.remove();
     });
   };
@@ -192,22 +192,22 @@
   };
 
   // Основная функция для фильтрации изображений
-  var getSuccessHandler = function (arr) {
-    var imgArray = arr;
-    getImages(imgArray);
+  var getSuccessHandler = function (items) {
+    var images = items;
+    getImages(images);
 
     var defaultPhotosHandler = function (evt) {
       deletePictures();
       removeFilter();
-      getImages(imgArray);
+      getImages(images);
       evt.target.classList.add('img-filters__button--active');
     };
 
     var randomPhotosHandler = function (evt) {
       deletePictures();
       removeFilter();
-      var uniquePhotos = imgArray.filter(function (it, i) {
-        return imgArray.indexOf(it) === i;
+      var uniquePhotos = images.filter(function (it, i) {
+        return images.indexOf(it) === i;
       });
       getImages(window.util.createRandomArray(uniquePhotos).slice(randomImg.MIN, randomImg.MAX));
       evt.target.classList.add('img-filters__button--active');
@@ -216,7 +216,7 @@
     var discussedPhotosHandler = function (evt) {
       deletePictures();
       removeFilter();
-      getImages(window.util.sortByComments(imgArray));
+      getImages(window.util.sortByComments(images));
       evt.target.classList.add('img-filters__button--active');
     };
 
