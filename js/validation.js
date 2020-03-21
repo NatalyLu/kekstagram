@@ -46,9 +46,9 @@
 
   // Функция отлавливающая ошибки при заполнении поля комментарий
   var hashtagValid = function () {
-    var hashStr = textHashtags.value;
-    hashStr.toLowerCase().trim();
-    var hashTags = hashStr.split(' ');
+    var hashTegsText = textHashtags.value;
+    hashTegsText.toLowerCase().trim();
+    var hashTags = hashTegsText.split(' ');
     var errorMessage = '';
 
     for (var i = 0; i < hashTags.length; i++) {

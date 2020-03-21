@@ -40,22 +40,22 @@
   };
 
   var bigPicKeydownEscHandler = function (evt) {
-    isEscEvent(evt, closeBigPicture);
+    escEvent(evt, closeBigPicture);
   };
 
   var bigPicKeydownEnterHandler = function (evt) {
-    isEnterEvent(evt, closeBigPicture);
+    enterEvent(evt, closeBigPicture);
   };
 
-  var isEscEvent = function (evt, arg) {
+  var escEvent = function (evt, argument) {
     if (evt.keyCode === ESC_KEYCODE) {
-      arg();
+      argument();
     }
   };
 
-  var isEnterEvent = function (evt, arg) {
+  var enterEvent = function (evt, argument) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      arg();
+      argument();
     }
   };
 
@@ -234,6 +234,6 @@
   window.loadData.loadData(getSuccessHandler);
 
   window.createData = {
-    isEscEvent: isEscEvent
+    escEvent: escEvent
   };
 })();

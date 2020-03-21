@@ -30,7 +30,7 @@
     document.addEventListener('click', findClickSuccessClick);
 
     var succesKeydownHandler = function (evt) {
-      window.createData.isEscEvent(evt, findClickSuccess);
+      window.createData.escEvent(evt, findClickSuccess);
     };
 
     document.addEventListener('keydown', succesKeydownHandler);
@@ -61,7 +61,7 @@
     document.addEventListener('click', closeErrorClick);
 
     var errorKeydownHandler = function (evt) {
-      window.createData.isEscEvent(evt, closeError);
+      window.createData.escEvent(evt, closeError);
     };
     document.addEventListener('keydown', errorKeydownHandler);
   };
