@@ -48,7 +48,7 @@
   var openPopup = function () {
     window.effectsForPhoto.imgUpload.classList.remove('hidden');
     document.addEventListener('keydown', openPopupEscPress);
-    window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_ZOOM_VALUE);
+    window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_VALUE);
 
     window.effectsForPhoto.imgUploadEffectLavel.style.display = 'none';
 

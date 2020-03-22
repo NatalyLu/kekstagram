@@ -6,7 +6,13 @@
 (function () {
   window.effectsForPhoto = {
     ESC_KEYCODE: 27,
-    STANDARD_ZOOM_VALUE: '100',
+    // STANDARD_VALUE используется в качестве стандартного (дефолтного) значения для зуммирования, насыщенности выбранного фильтра
+    STANDARD_VALUE: '100',
+    // Для рассчетов фильтров (в css)
+    EFFECT_VALUE: 100,
+    BLUR_MAX: 3,
+    BRIGHTNESS_MAX: 2,
+    BRIGHTNESS_MIN: 1,
 
     uploadFile: document.getElementById('upload-file'),
     imgUpload: document.querySelector('.img-upload__overlay'),
@@ -39,19 +45,19 @@
     installationValueOfEffect: function (valueOfEffect) {
       switch (window.effectsForPhoto.imgUploadimg.className) {
         case 'effects__preview--chrome':
-          window.effectsForPhoto.imgUploadimg.style.filter = 'grayscale(' + valueOfEffect / 100 + ')';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'grayscale(' + valueOfEffect / window.effectsForPhoto.EFFECT_VALUE + ')';
           break;
         case 'effects__preview--sepia':
-          window.effectsForPhoto.imgUploadimg.style.filter = 'sepia(' + valueOfEffect / 100 + ')';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'sepia(' + valueOfEffect / window.effectsForPhoto.EFFECT_VALUE + ')';
           break;
         case 'effects__preview--marvin':
           window.effectsForPhoto.imgUploadimg.style.filter = 'invert(' + valueOfEffect + '%)';
           break;
         case 'effects__preview--phobos':
-          window.effectsForPhoto.imgUploadimg.style.filter = 'blur(' + 3 * valueOfEffect / 100 + 'px)';
+          window.effectsForPhoto.imgUploadimg.style.filter = 'blur(' + window.effectsForPhoto.BLUR_MAX * valueOfEffect / window.effectsForPhoto.EFFECT_VALUE + 'px)';
           break;
         case 'effects__preview--heat':
-          window.effectsForPhoto. imgUploadimg.style.filter = 'brightness(' + (valueOfEffect / 100 * 2 + 1) + ')';
+          window.effectsForPhoto. imgUploadimg.style.filter = 'brightness(' + (valueOfEffect / window.effectsForPhoto.EFFECT_VALUE * window.effectsForPhoto.BRIGHTNESS_MAX + window.effectsForPhoto.BRIGHTNESS_MIN) + ')';
           break;
         default:
           window.effectsForPhoto.imgUploadimg.style.filter = 'none';
@@ -87,8 +93,7 @@
       } else {
         window.effectsForPhoto.imgUploadimg.className = 'effects__preview--' + currentEffect;
         window.effectsForPhoto.imgUploadEffectLavel.style.display = 'block';
-        window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_ZOOM_VALUE);
-        // window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
+        window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_VALUE);
         window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
         window.effectsForPhoto.changeEffect(100);
         window.effectsForPhoto.installationValueOfEffect(100);
