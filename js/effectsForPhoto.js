@@ -75,8 +75,8 @@
       return Math.round(valueEffect * 100 / lineWidth);
     },
 
-    // Функция задающая текущий эффект и сбрасывающая в 0 эффект при переключении на новый
-    imgAddEffectHandler: function (evtClick) {
+    // Задаем текущий эффект и сбрасываем в 0 эффект при переключении на новый
+    filterClickHandler: function (evtClick) {
       var currentEffect = evtClick.currentTarget.value;
 
       if (currentEffect === 'none') {

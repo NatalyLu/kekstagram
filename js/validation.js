@@ -99,7 +99,7 @@
     }
   };
 
-  var checkForm = function () {
+  var checkFormHandler = function () {
     var hashtags = textHashtags.value.toLowerCase().split(' ');
     if (textHashtags.value !== '') {
       checkHashtag(hashtags);
@@ -111,7 +111,7 @@
     }
   };
 
-  uploadSubmit.addEventListener('click', checkForm);
+  uploadSubmit.addEventListener('click', checkFormHandler);
 
   window.validation = {
     textHashtags: textHashtags

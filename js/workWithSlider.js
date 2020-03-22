@@ -43,6 +43,6 @@
 
   // Обработка клика по маленькой картинке (перемещщение между фильтрами)
   window.effectsForPhoto.effectsRadio.forEach(function (evtItem) {
-    evtItem.addEventListener('click', window.effectsForPhoto.imgAddEffectHandler);
+    evtItem.addEventListener('click', window.effectsForPhoto.filterClickHandler);
   });
 })();
