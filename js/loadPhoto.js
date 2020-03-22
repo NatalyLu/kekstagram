@@ -37,10 +37,11 @@
   };
 
   // Функция для обработки некорректной загрузки изображения
-  var loadImgUnsuccessful = function () {
+  var loadImgUnsuccessful = function (message) {
     uploadOverlay.classList.add('hidden');
 
     var errorPopup = document.querySelector('#error').content.cloneNode(true);
+    errorPopup.querySelector('.error__title').textContent = message;
     mainTeg.appendChild(errorPopup);
     var error = document.querySelector('.error');
 
@@ -77,6 +78,7 @@
 
   window.loadPhoto = {
     imgLoadForm: imgLoadForm,
+    loadImgUnsuccessful: loadImgUnsuccessful,
     mainClass: mainTeg
   };
 })();

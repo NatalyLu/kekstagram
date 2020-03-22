@@ -227,7 +227,7 @@
     it.addEventListener('click', filterClickHandler);
   });
 
-  window.loadData.loadData(showPictures);
+  window.loadData.loadData(showPictures, window.loadPhoto.loadImgUnsuccessful);
 
   window.createData = {
     escEvent: escEvent

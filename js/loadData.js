@@ -11,7 +11,7 @@
   var STATUS = 200;
 
   // Функция загрузки данных
-  var loadData = function (setOfData) {
+  var loadData = function (setOfData, onError) {
 
     var xhr = new XMLHttpRequest();
 
@@ -23,19 +23,19 @@
       if (xhr.status === STATUS) {
         setOfData(xhr.response);
       } else {
-        window.onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
 
     xhr.addEventListener('error', function () {
-      window.onError('Произошла ошибка соединения');
-    });
-
-    xhr.addEventListener('timeout', function () {
-      window.onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      onError('Произошла ошибка соединения');
     });
 
     xhr.timeout = TIMEOUT;
+
+    xhr.addEventListener('timeout', function () {
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
 
     xhr.open('GET', URL_LOAD);
     xhr.send();
