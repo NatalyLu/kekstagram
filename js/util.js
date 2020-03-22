@@ -17,8 +17,8 @@
       return photos;
     },
 
-    sortByComments: function (arr) {
-      return arr.slice().sort(function (a, b) {
+    sortByComments: function (array) {
+      return array.slice().sort(function (a, b) {
         return b.comments.length - a.comments.length;
       });
     }

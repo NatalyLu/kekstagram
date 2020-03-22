@@ -42,7 +42,7 @@
   });
 
   // Обработка клика по маленькой картинке (перемещщение между фильтрами)
-  window.effectsForPhoto.effectsRadio.forEach(function (evtItem) {
-    evtItem.addEventListener('click', window.effectsForPhoto.filterClickHandler);
+  window.effectsForPhoto.effectsRadio.forEach(function (item) {
+    item.addEventListener('click', window.effectsForPhoto.filterClickHandler);
   });
 })();

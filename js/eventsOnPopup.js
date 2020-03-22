@@ -49,16 +49,13 @@
     window.effectsForPhoto.imgUpload.classList.remove('hidden');
     document.addEventListener('keydown', openPopupEscPress);
     window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_VALUE);
-
     window.effectsForPhoto.imgUploadEffectLavel.style.display = 'none';
-
     window.effectsForPhoto.effectLevel.addEventListener('click', window.effectsForPhoto.changeCurrentEffect);
     window.effectsForPhoto.imgUploadScale.addEventListener('click', window.effectsForPhoto.onClickResize);
   };
 
   var closePopup = function () {
     document.removeEventListener('keydown', openPopupEscPress);
-
     window.effectsForPhoto.effectLevel.removeEventListener('click', window.effectsForPhoto.changeCurrentEffect);
     window.effectsForPhoto.imgUploadScale.removeEventListener('click', window.effectsForPhoto.onClickResize);
     window.effectsForPhoto.changeEffect(0);

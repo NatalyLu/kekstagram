@@ -13,12 +13,12 @@
   var COUNT_HASHTAGS = 5;
   var COMMENT_LENGTH = 140;
 
-  var addErrorBorder = function (el) {
-    el.style = 'border-color: red; border-width: 2px;';
+  var addErrorBorder = function (element) {
+    element.style = 'border-color: red; border-width: 2px;';
   };
 
-  var canselErrorBorder = function (el) {
-    el.style = 'border: none;';
+  var canselErrorBorder = function (element) {
+    element.style = 'border: none;';
   };
 
   // Функция для превращения всех букв каждой сроки массива в строчные

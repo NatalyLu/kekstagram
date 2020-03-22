@@ -8,11 +8,12 @@
     ESC_KEYCODE: 27,
     // STANDARD_VALUE используется в качестве стандартного (дефолтного) значения для зуммирования, насыщенности выбранного фильтра
     STANDARD_VALUE: '100',
-    // Для рассчетов фильтров (в css)
     EFFECT_VALUE: 100,
+    MAX_EFFECT_VALUE: 100,
     BLUR_MAX: 3,
     BRIGHTNESS_MAX: 2,
     BRIGHTNESS_MIN: 1,
+    NUMERAL_SYSTEM: 10,
 
     uploadFile: document.getElementById('upload-file'),
     imgUpload: document.querySelector('.img-upload__overlay'),
@@ -66,7 +67,7 @@
 
     // Функция для применения нового эффекта
     changeEffect: function (value) {
-      if ((value <= 100) && (value >= 0)) {
+      if ((value <= window.effectsForPhoto.MAX_EFFECT_VALUE) && (value >= 0)) {
         window.effectsForPhoto.levelValue.value = value;
         window.effectsForPhoto.levelValue.defaultValue = value;
         // Ставим курсор в нужное место и подтягиваем за ним линию с подсветкой
@@ -78,7 +79,7 @@
     // Функция для определения процента применения эффекта
     findEffectValueInPercent: function (value, lineWidth, linePossitionLeft) {
       var valueEffect = value - linePossitionLeft;
-      return Math.round(valueEffect * 100 / lineWidth);
+      return Math.round(valueEffect * window.effectsForPhoto.MAX_EFFECT_VALUE / lineWidth);
     },
 
     // Задаем текущий эффект и сбрасываем в 0 эффект при переключении на новый
@@ -95,8 +96,8 @@
         window.effectsForPhoto.imgUploadEffectLavel.style.display = 'block';
         window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_VALUE);
         window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
-        window.effectsForPhoto.changeEffect(100);
-        window.effectsForPhoto.installationValueOfEffect(100);
+        window.effectsForPhoto.changeEffect(window.effectsForPhoto.MAX_EFFECT_VALUE);
+        window.effectsForPhoto.installationValueOfEffect(window.effectsForPhoto.MAX_EFFECT_VALUE);
       }
     },
 
@@ -109,21 +110,15 @@
     changeCurrentEffect: function (evt) {
       var length = window.effectsForPhoto.levelLine.offsetWidth;
       var levelPosition = window.effectsForPhoto.levelLine.getBoundingClientRect().left;
-
       var findEffect = window.effectsForPhoto.findEffectValueInPercent(window.effectsForPhoto.knowCurrentClientX(evt), length, levelPosition);
       window.effectsForPhoto.changeEffect(findEffect);
       window.effectsForPhoto.installationValueOfEffect(findEffect);
     },
 
     // Функция применения зуммирования
-    // setZoomValue: function () {
-    //   window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
-    // },
-
-    // Функция применения зуммирования
     resizeImage: function (value) {
       window.effectsForPhoto.scaleControlValue.value = value + '%';
-      window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(' + value / 100 + ')';
+      window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(' + value / window.effectsForPhoto.MAX_EFFECT_VALUE + ')';
     },
 
     // Функция определения типа зуммирования +-
@@ -135,7 +130,7 @@
 
     // Функция определение конечного значения зуммирования
     onClickResize: function (evt) {
-      var currentValue = parseInt(window.effectsForPhoto.scaleControlValue.value, 10);
+      var currentValue = parseInt(window.effectsForPhoto.scaleControlValue.value, window.effectsForPhoto.NUMERAL_SYSTEM);
       var typeResize = window.effectsForPhoto.getTypeResize(evt);
 
       if (currentValue > window.effectsForPhoto.zoomSettings.scale.MIN && typeResize === 'smaller') {
