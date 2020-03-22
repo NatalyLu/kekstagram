@@ -10,11 +10,7 @@
   var picturesContainer = document.querySelector('.pictures');
   var imgFilters = document.querySelector('.img-filters');
   var imgFilterButtons = imgFilters.querySelectorAll('button');
-  // var imgFiltersForm = imgFilters.querySelector('.img-filters__form');
   var bigPicture = document.querySelector('.big-picture');
-  // var buttonDefault = imgFiltersForm.querySelector('#filter-default');
-  // var buttonR = imgFiltersForm.querySelector('#filter-random');
-  // var buttonD = imgFiltersForm.querySelector('#filter-discussed');
   var closeButton = bigPicture.querySelector('#picture-cancel');
 
   var RangeRandom = {
@@ -206,10 +202,7 @@
       if (targetFilter.id === 'filter-default') {
         getImages(imagesList);
       } else if (targetFilter.id === 'filter-random') {
-        var uniquePhotos = imagesList.filter(function (it, i) {
-          return imagesList.indexOf(it) === i;
-        });
-        getImages(window.util.createRandomArray(uniquePhotos).slice(RangeRandom.MIN, RangeRandom.MAX));
+        getImages(window.util.createRandomArray(imagesList));
       } else if (targetFilter.id === 'filter-discussed') {
         getImages(window.util.sortByComments(imagesList));
       }

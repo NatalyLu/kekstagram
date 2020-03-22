@@ -8,9 +8,11 @@
 
     createRandomArray: function (array) {
       var photos = [];
+      var copyArray = array.slice();
+      var j = 0;
       for (var i = 0; i < window.createData.RangeRandom.MAX; i++) {
-        var j = Math.floor(Math.random() * (array.length - 1));
-        photos[i] = array.splice(j, 1)[0];
+        j = Math.floor(Math.random() * (copyArray.length - 1));
+        photos[i] = copyArray.splice(j, 2)[0];
       }
       return photos;
     },

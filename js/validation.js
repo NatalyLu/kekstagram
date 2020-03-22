@@ -63,9 +63,6 @@
           } else if (!hashTags[i].match(/^#[a-zA-Z0-9а-яА-Я]+$/)) {
             errorMessage = 'Хэштег должен состоять из букв и чисел';
             break;
-          } else if (compareElements(hashTags)) {
-            errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
-            break;
           } else if (hashTags[i].indexOf('#', 1) > 1) {
             errorMessage = 'Хэштеги должны разделяться пробелами';
             break;
@@ -74,6 +71,9 @@
           errorMessage = 'Хэш-тег должен начинаться с символа #';
           break;
         }
+      }
+      if ((errorMessage === '') && (compareElements(hashTags))) {
+        errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
       }
     } else {
       errorMessage = 'Нельзя указать больше ' + COUNT_HASHTAGS + ' хэш-тегов';
