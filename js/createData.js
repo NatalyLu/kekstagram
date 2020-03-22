@@ -9,11 +9,12 @@
   var template = document.querySelector('#picture').content.querySelector('.picture');
   var picturesContainer = document.querySelector('.pictures');
   var imgFilters = document.querySelector('.img-filters');
-  var imgFiltersForm = imgFilters.querySelector('.img-filters__form');
+  var imgFilterButtons = imgFilters.querySelectorAll('button');
+  // var imgFiltersForm = imgFilters.querySelector('.img-filters__form');
   var bigPicture = document.querySelector('.big-picture');
-  var buttonDefault = imgFiltersForm.querySelector('#filter-default');
-  var buttonR = imgFiltersForm.querySelector('#filter-random');
-  var buttonD = imgFiltersForm.querySelector('#filter-discussed');
+  // var buttonDefault = imgFiltersForm.querySelector('#filter-default');
+  // var buttonR = imgFiltersForm.querySelector('#filter-random');
+  // var buttonD = imgFiltersForm.querySelector('#filter-discussed');
   var closeButton = bigPicture.querySelector('#picture-cancel');
 
   var RangeRandom = {
@@ -26,6 +27,8 @@
 
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 27;
+
+  var imagesList = [];
 
   var showElement = function (item) {
     item.classList.remove('hidden');
@@ -191,47 +194,40 @@
     imgFilters.classList.remove('img-filters--inactive');
   };
 
-  // Основная функция для фильтрации изображений
-  var getSuccessHandler = function (items) {
-    var images = items;
-    getImages(images);
+  // Обработчик для фильтрации изображений
+  var filterClickHandler = debounce(function (evt) {
+    var targetFilter = evt.target;
 
-    var defaultPhotosHandler = function (evt) {
-      deletePictures();
+    if (!targetFilter.classList.contains('img-filters__button--active')) {
       removeFilter();
-      getImages(images);
-      evt.target.classList.add('img-filters__button--active');
-    };
-
-    var randomPhotosHandler = function (evt) {
       deletePictures();
-      removeFilter();
-      var uniquePhotos = images.filter(function (it, i) {
-        return images.indexOf(it) === i;
-      });
-      getImages(window.util.createRandomArray(uniquePhotos).slice(RangeRandom.MIN, RangeRandom.MAX));
-      evt.target.classList.add('img-filters__button--active');
-    };
+      targetFilter.classList.add('img-filters__button--active');
 
-    var discussedPhotosHandler = function (evt) {
-      deletePictures();
-      removeFilter();
-      getImages(window.util.sortByComments(images));
-      evt.target.classList.add('img-filters__button--active');
-    };
+      if (targetFilter.id === 'filter-default') {
+        getImages(imagesList);
+      } else if (targetFilter.id === 'filter-random') {
+        var uniquePhotos = imagesList.filter(function (it, i) {
+          return imagesList.indexOf(it) === i;
+        });
+        getImages(window.util.createRandomArray(uniquePhotos).slice(RangeRandom.MIN, RangeRandom.MAX));
+      } else if (targetFilter.id === 'filter-discussed') {
+        getImages(window.util.sortByComments(imagesList));
+      }
+    }
+  });
 
-    buttonDefault.addEventListener('click', debounce(function (evt) {
-      defaultPhotosHandler(evt);
-    }));
-    buttonR.addEventListener('click', debounce(function (evt) {
-      randomPhotosHandler(evt);
-    }));
-    buttonD.addEventListener('click', debounce(function (evt) {
-      discussedPhotosHandler(evt);
-    }));
+  // Функция первого показа изображений
+  var showPictures = function (items) {
+    getImages(items);
+    imagesList = items;
   };
 
-  window.loadData.loadData(getSuccessHandler);
+  // Ставим обработчик событий с устранением дребезга на кнопки фильтрации фотографий
+  imgFilterButtons.forEach(function (it) {
+    it.addEventListener('click', filterClickHandler);
+  });
+
+  window.loadData.loadData(showPictures);
 
   window.createData = {
     escEvent: escEvent
