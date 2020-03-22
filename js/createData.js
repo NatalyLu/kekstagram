@@ -230,6 +230,7 @@
   window.loadData.loadData(showPictures, window.loadPhoto.loadImgUnsuccessful);
 
   window.createData = {
-    escEvent: escEvent
+    escEvent: escEvent,
+    RangeRandom: RangeRandom
   };
 })();

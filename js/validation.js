@@ -51,32 +51,32 @@
     var hashTags = hashTegsText.split(' ');
     var errorMessage = '';
 
-    for (var i = 0; i < hashTags.length; i++) {
-      if (hashTags.length <= COUNT_HASHTAGS) {
-        hashTags.forEach(function (item) {
-          if (item[0] === '#') {
-            if (item.length > LENGTH) {
-              errorMessage = 'Длина хэш-тега не может быть больше ' + LENGTH + ' символов, включая решетку';
-            }
-          } else {
-            errorMessage = 'Хэш-тег должен начинаться с символа #';
-          }
-          if (!item.match(/^#[a-zA-Z0-9а-яА-Я]+$/)) {
-            errorMessage = 'Хэштег должен состоять из букв и чисел';
-          }
-          if (compareElements(hashTags)) {
-            errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
-          }
-          if (item.length === 1) {
+    if (hashTags.length <= COUNT_HASHTAGS) {
+      for (var i = 0; i < hashTags.length; i++) {
+        if (hashTags[i][0] === '#') {
+          if (hashTags[i].length > LENGTH) {
+            errorMessage = 'Длина хэш-тега не может быть больше ' + LENGTH + ' символов, включая решетку';
+            break;
+          } else if (hashTags[i].length === 1) {
             errorMessage = 'Хеш-тег не может состоять только из одной решётки';
-          }
-          if (item.indexOf('#', 1) > 1) {
+            break;
+          } else if (!hashTags[i].match(/^#[a-zA-Z0-9а-яА-Я]+$/)) {
+            errorMessage = 'Хэштег должен состоять из букв и чисел';
+            break;
+          } else if (compareElements(hashTags)) {
+            errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
+            break;
+          } else if (hashTags[i].indexOf('#', 1) > 1) {
             errorMessage = 'Хэштеги должны разделяться пробелами';
+            break;
           }
-        });
-      } else {
-        errorMessage = 'Нельзя указать больше ' + COUNT_HASHTAGS + ' хэш-тегов';
+        } else {
+          errorMessage = 'Хэш-тег должен начинаться с символа #';
+          break;
+        }
       }
+    } else {
+      errorMessage = 'Нельзя указать больше ' + COUNT_HASHTAGS + ' хэш-тегов';
     }
 
     if (errorMessage !== '') {

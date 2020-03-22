@@ -5,12 +5,14 @@
 // .......................................................
 (function () {
   window.util = {
-    createRandom: function () {
-      return Math.random() - 0.5;
-    },
 
     createRandomArray: function (array) {
-      return array.sort(window.util.createRandom);
+      var photos = [];
+      for (var i = 0; i < window.createData.RangeRandom.MAX; i++) {
+        var j = Math.floor(Math.random() * (array.length - 1));
+        photos[i] = array.splice(j, 1)[0];
+      }
+      return photos;
     },
 
     sortByComments: function (arr) {
