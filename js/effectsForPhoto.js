@@ -6,7 +6,7 @@
 (function () {
   window.effectsForPhoto = {
     ESC_KEYCODE: 27,
-    STANDARD_ZOOM_VALUE: '100%',
+    STANDARD_ZOOM_VALUE: '100',
 
     uploadFile: document.getElementById('upload-file'),
     imgUpload: document.querySelector('.img-upload__overlay'),
@@ -87,7 +87,8 @@
       } else {
         window.effectsForPhoto.imgUploadimg.className = 'effects__preview--' + currentEffect;
         window.effectsForPhoto.imgUploadEffectLavel.style.display = 'block';
-        window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
+        window.effectsForPhoto.resizeImage(window.effectsForPhoto.STANDARD_ZOOM_VALUE);
+        // window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
         window.effectsForPhoto.imgUploadPreview.style.transform = 'scale(1)';
         window.effectsForPhoto.changeEffect(100);
         window.effectsForPhoto.installationValueOfEffect(100);
@@ -110,9 +111,9 @@
     },
 
     // Функция применения зуммирования
-    setZoomValue: function () {
-      window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
-    },
+    // setZoomValue: function () {
+    //   window.effectsForPhoto.scaleControlValue.value = window.effectsForPhoto.STANDARD_ZOOM_VALUE;
+    // },
 
     // Функция применения зуммирования
     resizeImage: function (value) {
