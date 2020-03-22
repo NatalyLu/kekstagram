@@ -220,7 +220,7 @@
     it.addEventListener('click', filterClickHandler);
   });
 
-  window.loadData.loadData(showPictures, window.loadPhoto.loadImgUnsuccessful);
+  window.loadData.submitRequest(showPictures, window.loadPhoto.loadImgUnsuccessful);
 
   window.createData = {
     escEvent: escEvent,

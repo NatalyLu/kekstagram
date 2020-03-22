@@ -11,7 +11,7 @@
   var STATUS = 200;
 
   // Функция загрузки данных
-  var loadData = function (setOfData, onError) {
+  var submitRequest = function (setOfData, onError) {
 
     var xhr = new XMLHttpRequest();
 
@@ -41,7 +41,7 @@
     xhr.send();
   };
 
-  var saveData = function (item, onLoad, onError) {
+  var savePackage = function (item, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.timeout = TIMEOUT;
@@ -71,7 +71,7 @@
   };
 
   window.loadData = {
-    loadData: loadData,
-    saveData: saveData
+    submitRequest: submitRequest,
+    savePackage: savePackage
   };
 })();

@@ -71,7 +71,7 @@
     evt.preventDefault();
 
     window.eventsOnPopup.closePopup();
-    window.loadData.saveData(new FormData(imgLoadForm), loadImgSuccessful, loadImgUnsuccessful);
+    window.loadData.savePackage(new FormData(imgLoadForm), loadImgSuccessful, loadImgUnsuccessful);
     window.loadPhoto.imgLoadForm.reset();
 
   });
